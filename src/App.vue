@@ -18,6 +18,7 @@
     </div>
     <div class="col-md-4">
       <SelectionsList :selections="selections" :totalSelectedPercentage="totalSelectedPercentage" @highlight-selection="highlightSelection" @remove-selection="removeSelection" />
+    <Downloader :selections="selections" />
     </div>
   </div>
 </template>
@@ -28,6 +29,7 @@ import WallDimensionsInput from './components/WallDimensionsInput.vue'
 import CanvasArea from './components/CanvasArea.vue'
 import SelectionDetails from './components/SelectionDetails.vue'
 import SelectionsList from './components/SelectionsList.vue'
+import Downloader from './components/Downloader.vue'
 
 export default {
   name: 'App',
@@ -36,7 +38,8 @@ export default {
     WallDimensionsInput,
     CanvasArea,
     SelectionDetails,
-    SelectionsList
+    SelectionsList,
+    Downloader
   },
   data() {
     return {
