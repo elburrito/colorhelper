@@ -1,24 +1,48 @@
 <template>
-  <h1>Color Helpers</h1>
-  <ImageUploader v-if="!image" @load-image="loadImage" />
-  <div v-if="image" class="row">
-    <div class="col-md-8">
-      <WallDimensionsInput :dimensions="wallDimensions" @update-dimensions="updateWallDimensions" />
-      <SelectionDetails :currentSelection="currentSelection" @update-selection="updateSelection" @add-to-list="addToList" @cancel-selection="cancelSelection" />
-      <CanvasArea
-        ref="canvasArea"
-        :image="image"
-        :cursor="cursor"
-        :currentSelection="currentSelection"
-        @update-cursor="onUpdateCursor"
-        @hide-cursor="onHideCursor"
-        @select-color="onSelectColor"
-        @canvas-ready="onCanvasReady"
-      />
-    </div>
-    <div class="col-md-4">
-      <SelectionsList :selections="selections" :totalSelectedPercentage="totalSelectedPercentage" @highlight-selection="highlightSelection" @remove-selection="removeSelection" />
-    <Downloader :selections="selections" />
+  <div class="container min-vh-100">
+    <!-- STEP 1: Upload Image-->
+      <div v-if="!image" class="row min-vh-100">
+        <div class="col-md-4">
+          <img src="/src/assets/Logo@2x.png" alt="El Burritos Mural Helper Logo" width="350px" style="max-width: 100%;" class="mt-2"/>
+          <hr></hr>
+          <p>What you can do here:</p>
+          <ul>
+            <li>Drop your mural sketch and calculcate the squaremeters per color</li>
+            <li class="crossed">More</li>
+          </ul>
+        </div>
+
+        <div class="col-md-8 flex-fill d-flex">
+            <ImageUploader v-if="!image" @load-image="loadImage" style="align-self: anchor-center;"/>
+        </div>
+      </div>
+
+    <!-- STEP 2: Pick Colors-->
+      <div v-else class="row min-vh-100">
+        <div class="col-md-12">
+          <!-- main content -->
+          <div class="row">
+            <div class="col-md-8">
+              <WallDimensionsInput :dimensions="wallDimensions" @update-dimensions="updateWallDimensions" />
+              <SelectionDetails :currentSelection="currentSelection" @update-selection="updateSelection" @add-to-list="addToList" @cancel-selection="cancelSelection" />
+              <CanvasArea
+                ref="canvasArea"
+                :image="image"
+                    :cursor="cursor"
+                    :currentSelection="currentSelection"
+                    @update-cursor="onUpdateCursor"
+                    @hide-cursor="onHideCursor"
+                    @select-color="onSelectColor"
+                    @canvas-ready="onCanvasReady"
+                  />
+            </div>
+
+            <div class="col-md-4">
+              <SelectionsList :selections="selections" :totalSelectedPercentage="totalSelectedPercentage" @highlight-selection="highlightSelection" @remove-selection="removeSelection" />
+              <Downloader :selections="selections" />
+            </div>
+          </div>
+        </div>    
     </div>
   </div>
 </template>
@@ -156,6 +180,16 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #FFC904;
+  background-image: url('assets/squiggles_and_doodles_background.png');
+  background-blend-mode: soft-light;
+  background-size: 500px;
+}
+
 .canvas-wrapper {
   position: relative;
   max-width: 100%;

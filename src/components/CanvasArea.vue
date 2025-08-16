@@ -147,6 +147,8 @@ export default {
 .canvas-wrapper {
   position: relative;
   max-width: 100%;
+  border: 10px solid #000;
+  border-radius: 4px;
 }
 canvas {
   display: block;
